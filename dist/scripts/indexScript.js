@@ -796,8 +796,8 @@ $(function () {
 
         var tableRow = $(document.createElement('tr'));
 
-        var upArrow = $(document.createElement('td')).click({currentIndex: index}, rowMoveUp).text('up');
-        var downArrow = $(document.createElement('td')).click({currentIndex: index}, rowMoveDown).text('down');
+        var upArrow = $(document.createElement('td')).click({currentIndex: index}, rowMoveUp).html('&#8679;');
+        var downArrow = $(document.createElement('td')).click({currentIndex: index}, rowMoveDown).html('&#8681;');
         var checkbox = $(document.createElement('td')).append($(document.createElement('input')).prop("type", "checkbox").val(index));
 
         tableRow.append(checkbox);
@@ -863,9 +863,9 @@ $(function () {
 
         var tableRow = $(document.createElement('tr'));
 
-        var up = $(document.createElement('td')).text(langData[lang].up);
-        var down = $(document.createElement('td')).text(langData[lang].down);
-        var checkbox = $(document.createElement('td'));
+        var up = $(document.createElement('th')).text(langData[lang].up);
+        var down = $(document.createElement('th')).text(langData[lang].down);
+        var checkbox = $(document.createElement('th'));
 
         tableRow.append(checkbox);
         tableRow.append(up);
