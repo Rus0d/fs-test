@@ -1,5 +1,5 @@
 .container {
-    padding: 10px;
+    padding: 20px 10px 0px 10px;
 }
 
 .select2 {
@@ -8,17 +8,13 @@
 
 .table-wrapper {
     overflow: auto;
+    height: 334px;
     margin-bottom: 20px;
 }
 
 .table-wrapper table {
     border: 1px solid #aaa;
     border-radius: 4px;
-}
-
-.table-wrapper thead td {
-    text-align: center;
-    vertical-align: middle;
 }
 
 .table-wrapper th, .table-wrapper td {
@@ -28,10 +24,23 @@
 }
 
 .table-wrapper th {
+    vertical-align: middle;
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
     transition: 0.5s ease-in;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.table-wrapper td {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .table-wrapper th:hover {
@@ -68,17 +77,26 @@
 }
 
 .buttonsBlock {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .buttonsBlock div {
-    padding: 5px 15px;
+    padding: 10px 15px;
     text-align: center;
     background-color: #4CAF50;
+    border-radius: 4px;
     color: white;
     cursor: pointer;
     transition: 0.5s ease-in;
     display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 163px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .buttonsBlock div:hover {
@@ -89,11 +107,17 @@
 
 #textArea {
     width: 100%;
-    min-height: 300px;
+    height: 334px;
     resize: none;
     margin-bottom: 20px;
     border: 1px solid #aaa;
     border-radius: 4px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
 #chart_div {
@@ -102,6 +126,14 @@
 }
 
 
-@media (max-width: 150px) {
-  
+@media (max-width: 387px) {
+
+    .buttonsBlock div {
+        width: 100%;
+    }
+
+    .select2 {
+        width: 100%!important;
+    }
+
 }
