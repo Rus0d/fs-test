@@ -498,34 +498,6 @@ $(function () {
 
 
 
-
-    $("#languageSelect").select2({
-        data: langData,
-        width: 200,
-        minimumResultsForSearch: Infinity
-    })
-        .on("select2:select", function (e) {
-        var selected_element = $(e.currentTarget);
-        selected_lang = selected_element.val();
-
-        tableHeadRender(langData, '#table', selected_lang);
-
-        drawChart();
-    });
-
-    $("#addRow").click(addRow);
-
-    $("#deleteRow").click(deleteRows);
-
-    $("#download").click(downloadData);
-
-    $("#upload").click(uploadData);
-
-    $("#clear").click(clearTextArea);
-
-
-
-
     /*$.ajax({
         type: "GET",
         url: "./scripts/data.json",
@@ -541,7 +513,10 @@ $(function () {
         }
     });*/
 
-    var dataValidation = function (data, config) {
+
+/*------------ Validating function ------------*/
+
+    function dataValidation(data, config) {
 
         var transformedData = [];
 
@@ -579,8 +554,37 @@ $(function () {
     };
 
 
+/*------------ Add event listiner functions ------------*/
 
-    var dataSort = function (data, field) {
+    $("#languageSelect").select2({
+        data: langData,
+        width: 200,
+        minimumResultsForSearch: Infinity
+    })
+        .on("select2:select", function (e) {
+            var selected_element = $(e.currentTarget);
+            selected_lang = selected_element.val();
+
+            tableHeadRender(langData, '#table', selected_lang);
+
+            drawChart();
+        });
+
+    $("#addRow").click(addRow);
+
+    $("#deleteRow").click(deleteRows);
+
+    $("#download").click(downloadData);
+
+    $("#upload").click(uploadData);
+
+    $("#clear").click(clearTextArea);
+
+
+
+/*------------ Call back functions ------------*/
+
+    function dataSort(data, field) {
 
         if ( orderConfig.field === field ) {
 
@@ -666,7 +670,7 @@ $(function () {
 
     };
 
-    var rowMoveUp = function (e) {
+    function rowMoveUp(e) {
 
         if ( e.data.currentIndex > 0 ) {
 
@@ -679,7 +683,7 @@ $(function () {
         }
     };
 
-    var rowMoveDown = function (e) {
+    function rowMoveDown(e) {
 
         if ( e.data.currentIndex < validData.length ) {
 
@@ -691,16 +695,6 @@ $(function () {
 
         }
 
-    };
-
-    var changedTableBodyCell = function (e) {
-        e.data.target[e.data.prop] = this.value;
-
-        drawChart();
-    };
-
-    var clickTableHeadCell = function (e) {
-        dataSort(validData, e.data.prop);
     };
 
     function addRow() {
@@ -751,9 +745,21 @@ $(function () {
 
     };
 
+    function changedTableBodyCell(e) {
+        e.data.target[e.data.prop] = this.value;
+
+        drawChart();
+    };
+
+    function clickTableHeadCell(e) {
+        dataSort(validData, e.data.prop);
+    };
 
 
-    var tableBodyRender = function (data, selector) {
+
+/*------------ Table body render function ------------*/
+
+    function tableBodyRender(data, selector) {
 
         var tableBody = $(document.createElement('tbody'));
 
@@ -771,28 +777,7 @@ $(function () {
 
     };
 
-    var createTableBodyCell = function (value, obj, key) {
-
-        var el = $(document.createElement('input'));
-
-        if (typeof obj !== 'undefined' && typeof key !== 'undefined') {
-
-            return $(document.createElement('td')).append(
-                el.val(value).change({'target': obj, 'prop': key}, changedTableBodyCell)
-            );
-
-        }
-        else {
-
-            return $(document.createElement('td')).append(
-                el.val(value)
-            );
-
-        }
-
-    };
-
-    var createTableBodyRow = function (row, index) {
+    function createTableBodyRow(row, index) {
 
         var tableRow = $(document.createElement('tr'));
 
@@ -828,9 +813,32 @@ $(function () {
 
     };
 
+    function createTableBodyCell(value, obj, key) {
+
+        var el = $(document.createElement('input'));
+
+        if (typeof obj !== 'undefined' && typeof key !== 'undefined') {
+
+            return $(document.createElement('td')).append(
+                el.val(value).change({'target': obj, 'prop': key}, changedTableBodyCell)
+            );
+
+        }
+        else {
+
+            return $(document.createElement('td')).append(
+                el.val(value)
+            );
+
+        }
+
+    };
 
 
-    var tableHeadRender = function (data, selector, lang) {
+
+/*------------ Table head render function ------------*/
+
+    function tableHeadRender(data, selector, lang) {
 
         var tableHead = $(document.createElement('thead'));
 
@@ -844,22 +852,7 @@ $(function () {
 
     };
 
-    var createTableHeadCell = function (value, obj, key) {
-
-        if (typeof obj !== 'undefined' && typeof key !== 'undefined') {
-
-            return $(document.createElement('th')).text(value).click({'prop': key}, clickTableHeadCell);
-
-        }
-        else {
-
-            return $(document.createElement('th')).text(value);
-
-        }
-
-    };
-
-    var createTableHeadRow = function (row, lang) {
+    function createTableHeadRow(row, lang) {
 
         var tableRow = $(document.createElement('tr'));
 
@@ -895,6 +888,21 @@ $(function () {
 
     };
 
+    function createTableHeadCell(value, obj, key) {
+
+        if (typeof obj !== 'undefined' && typeof key !== 'undefined') {
+
+            return $(document.createElement('th')).text(value).click({'prop': key}, clickTableHeadCell);
+
+        }
+        else {
+
+            return $(document.createElement('th')).text(value);
+
+        }
+
+    };
+
 
 
     tableHeadRender(langData, '#table', selected_lang);
@@ -904,7 +912,6 @@ $(function () {
     tableBodyRender(validData, '#table');
 
     textArea.val(JSON.stringify(validData));
-
 
 
 
