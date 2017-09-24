@@ -939,15 +939,23 @@ $(function () {
 
         data.addRows(result);
 
+        console.log(langData[selected_lang].country);
+
         // Set chart options
         var options = {
             'title': langData[selected_lang].country,
-            chartArea: {left: 0, top: 0, width: "100%", height: "100%"}
+            width: 'inherit',
+            height: 'inherit',
+            //chartArea: {left: 0, top: 0, width: "100%", height: "100%"}
         };
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+
+        $(window).resize(function(){
+            chart.draw(data, options);
+        });
     }
 
 });
